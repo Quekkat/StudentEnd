@@ -1,3 +1,8 @@
+import BoughtWidget from "./Widgets/BoughtWidget";
+import DashboardTab from "./Widgets/DashboardTab";
+import ShopWidget from "./Widgets/ShopWidget";
+import { useStore } from "./GlobalVariables";
+
 const MainPage = ()=>{
     const{widgetTab} = useStore();
     return(
@@ -8,14 +13,8 @@ const MainPage = ()=>{
             </div>
             <div>
                 
-                {widgetTab ==="inventory" && <InventoryWidget/>}
-                {widgetTab ==="add-new" && <CreateNewInventory/>}
-                {widgetTab === "verify-teachers" && <VerifyTeachers/>}
-                {widgetTab ==="verify-payment" && <VerifyStudentPayment/>}
-                {widgetTab ==="transaction-history" && <Transaction/>}
-                {widgetTab ==="verify-student" && <VerifyStudent/>}
-                {widgetTab ==="add-new-payment" && <AddNewPayment/>}
-                {widgetTab ==="stock-list" && <StockList/>}
+                {widgetTab ==="shop" && <ShopWidget/>}
+                {widgetTab ==="cart" && <BoughtWidget/>}
             </div>
         </div>
     );
