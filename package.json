@@ -10,5 +10,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Quekkat/StudentEnd.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Quekkat/StudentEnd/issues"
+  },
+  "homepage": "https://github.com/Quekkat/StudentEnd#readme"
 }
