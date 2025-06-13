@@ -1,7 +1,7 @@
 import {create} from "zustand";
 import { axiosInstance } from "./axios";
 export const useStore =create((set,get)=>({
-    authUser: true, //todo:null when backend finally done
+    authUser: null, //todo:null when backend finally done
     widgetTab: "shop",
 
     login: async (data) =>{
