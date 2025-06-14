@@ -6,6 +6,15 @@ import { useStore } from "../GlobalVariables";
 const DashboardTab = () => {
   const { widgetTab, setWidgetTab } = useStore();
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleNavClick = (tab) => {
+    setWidgetTab(tab);
+    scrollToTop();
+  };
+
   return (
     <>
       <nav className="navbar">
@@ -14,12 +23,12 @@ const DashboardTab = () => {
             src={logo}
             alt="Logo"
             className="navbar-logo clickable-logo"
-            onClick={() => setWidgetTab("home")}
+            onClick={() => handleNavClick("home")}
             style={{ cursor: "pointer" }}
           />
         </div>
         <div className="navbar-section navbar-center">
-          <button className="nav-link" onClick={() => setWidgetTab("home")}>
+          <button className="nav-link" onClick={() => handleNavClick("home")}>
             Home
           </button>
           <input
@@ -29,10 +38,10 @@ const DashboardTab = () => {
           />
         </div>
         <div className="navbar-section navbar-right">
-          <button className="nav-link" onClick={() => setWidgetTab("shop")}>
+          <button className="nav-link" onClick={() => handleNavClick("shop")}>
             All Products
           </button>
-          <button className="nav-link" onClick={() => setWidgetTab("cart")}>
+          <button className="nav-link" onClick={() => handleNavClick("cart")}>
             <span className="material-symbols-rounded">shopping_cart</span>
           </button>
         </div>
