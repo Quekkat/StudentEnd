@@ -1,5 +1,11 @@
 /* Navbar container */
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -89,6 +95,7 @@
   gap: 40px;
   padding: 60px 40px;
   flex-wrap: wrap;
+  margin-top: 64px; /* Offset for fixed navbar height */
 }
 
 /* Left side */

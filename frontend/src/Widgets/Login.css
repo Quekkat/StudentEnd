@@ -165,10 +165,10 @@ body {
 .login-input:-webkit-autofill:focus,
 .login-input:-webkit-autofill:hover,
 .login-input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px rgba(128,128,128,0.18) inset !important;
-    box-shadow: 0 0 0 1000px rgba(128,128,128,0.18) inset !important;
-    -webkit-text-fill-color: #fff !important;
-    color: #fff !important;
+    -webkit-box-shadow: 0 0 0 1000px rgba(128,128,128,0.18) inset;
+    box-shadow: 0 0 0 1000px rgba(128,128,128,0.18) inset;
+    -webkit-text-fill-color: #fff;
+    color: #fff;
     transition: background-color 5000s ease-in-out 0s;
     caret-color: #fff;
 }

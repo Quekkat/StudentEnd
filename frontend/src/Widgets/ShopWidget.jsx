@@ -1,27 +1,35 @@
 import { useEffect } from "react";
 import "./ShopWidget.css";
 import productImg from "../assets/nihguh.jpg";
+import { useStore } from "../GlobalVariables";
 
 const products = [
-  { name: "PE Uniform", price: "₱350" },
-  { name: "Event T-Shirt", price: "₱250" },
-  { name: "ID Lace", price: "₱50" },
-  { name: "School Jacket", price: "₱700" },
-  { name: "Notebook", price: "₱40" },
-  { name: "Ballpen", price: "₱20" },
-  { name: "Vision Mug", price: "₱120" },
-  { name: "Vision Cap", price: "₱180" },
-  { name: "Vision Bag", price: "₱400" },
-  { name: "Vision Patch", price: "₱60" },
+  { name: "PE Uniform", price: 350 },
+  { name: "Event T-Shirt", price: 250 },
+  { name: "ID Lace", price: 50 },
+  { name: "School Jacket", price: 700 },
+  { name: "Notebook", price: 40 },
+  { name: "Ballpen", price: 20 },
+  { name: "Vision Mug", price: 120 },
+  { name: "Vision Cap", price: 180 },
+  { name: "Vision Bag", price: 400 },
+  { name: "Vision Patch", price: 60 },
 ];
 
 const ShopWidget = () => {
+  const { setWidgetTab, cart, setCart } = useStore();
+
   useEffect(() => {
     document.body.classList.add("shop-no-bg");
     return () => {
       document.body.classList.remove("shop-no-bg");
     };
   }, []);
+
+  const handleAddToCart = (product) => {
+    setCart([...cart, { ...product, img: productImg }]);
+    setWidgetTab("cart");
+  };
 
   return (
     <div className="shop-bg">
@@ -34,8 +42,8 @@ const ShopWidget = () => {
             </div>
             <div className="shop-card-name">{item.name}</div>
             <div className="shop-card-bottom">
-              <div className="shop-card-price">{item.price}</div>
-              <button className="shop-card-cart-btn">
+              <div className="shop-card-price">₱{item.price}</div>
+              <button className="shop-card-cart-btn" onClick={() => handleAddToCart(item)}>
                 <span className="material-symbols-rounded">shopping_cart</span>
                 <span className="shop-card-cart-text">Add</span>
               </button>

@@ -10,7 +10,13 @@ const DashboardTab = () => {
     <>
       <nav className="navbar">
         <div className="navbar-section navbar-left">
-          <img src={logo} alt="Logo" className="navbar-logo" />
+          <img
+            src={logo}
+            alt="Logo"
+            className="navbar-logo clickable-logo"
+            onClick={() => setWidgetTab("home")}
+            style={{ cursor: "pointer" }}
+          />
         </div>
         <div className="navbar-section navbar-center">
           <button className="nav-link" onClick={() => setWidgetTab("home")}>

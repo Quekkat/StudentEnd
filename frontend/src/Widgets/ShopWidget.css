@@ -1,10 +1,16 @@
 .shop-bg {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   background: #fff;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  margin-top: 120px; /* Offset for fixed navbar */
+}
+
+/* Prevent horizontal scroll on the whole page */
+body, html {
+  overflow-x: hidden;
 }
 
 .shop-title {
