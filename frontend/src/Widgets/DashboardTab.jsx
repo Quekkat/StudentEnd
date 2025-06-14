@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./DashboardTab.css";
 import logo from "../assets/logo.png";
 import hitleer from "../assets/hitleer.jpg";
@@ -5,6 +6,7 @@ import { useStore } from "../GlobalVariables";
 
 const DashboardTab = () => {
   const { widgetTab, setWidgetTab } = useStore();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -13,6 +15,7 @@ const DashboardTab = () => {
   const handleNavClick = (tab) => {
     setWidgetTab(tab);
     scrollToTop();
+    setIsMenuOpen(false);
   };
 
   return (
@@ -24,10 +27,11 @@ const DashboardTab = () => {
             alt="Logo"
             className="navbar-logo clickable-logo"
             onClick={() => handleNavClick("home")}
-            style={{ cursor: "pointer" }}
           />
         </div>
-        <div className="navbar-section navbar-center">
+
+        {/* Desktop Menu */}
+        <div className="navbar-section navbar-center desktop-only">
           <button className="nav-link" onClick={() => handleNavClick("home")}>
             Home
           </button>
@@ -37,7 +41,7 @@ const DashboardTab = () => {
             className="search-input"
           />
         </div>
-        <div className="navbar-section navbar-right">
+        <div className="navbar-section navbar-right desktop-only">
           <button className="nav-link" onClick={() => handleNavClick("shop")}>
             All Products
           </button>
@@ -45,7 +49,34 @@ const DashboardTab = () => {
             <span className="material-symbols-rounded">shopping_cart</span>
           </button>
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <span className="material-symbols-rounded">menu</span>
+        </button>
       </nav>
+
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${isMenuOpen ? "open" : ""}`}>
+        <button className="nav-link" onClick={() => handleNavClick("home")}>
+          Home
+        </button>
+        <button className="nav-link" onClick={() => handleNavClick("shop")}>
+          All Products
+        </button>
+        <button className="nav-link" onClick={() => handleNavClick("cart")}>
+          <span className="material-symbols-rounded">shopping_cart</span>
+          Cart
+        </button>
+        <input
+          type="text"
+          placeholder="Search products"
+          className="search-input mobile-search"
+        />
+      </div>
 
       {widgetTab === "home" && (
         <div className="welcome-main-row">
