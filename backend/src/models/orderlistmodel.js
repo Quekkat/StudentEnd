@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    studentLMSID:{
+        type: String,
+        required: true,
+    },
     paymentVerified:{
         type: Boolean,
         default:false,

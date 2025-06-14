@@ -82,3 +82,36 @@ export const seeProductList = async (req,res) =>{
         res.status(500).json({message:"Internal server Error"});
     }
 }
+export const orderProduct = async (req,res) =>{
+    try{
+        const {ORDERID, GCASHPROOF} = req.body;
+        const student = req.student;
+        if(!ORDERID || ! GCASHPROOF) return res.status(400).json({message: "Incomplete request"});
+        const targetProduct = await Inventory.findById(ORDERID);
+        if(!targetProduct) return res.status(404).json({message:"product doesnt exist"});
+
+
+        //cloudinary
+        const proofOfPayment = await cloudinary.uploader.upload(GCASHPROOF);
+
+        const studentFullname = student.firstName + " " + student.lastName;
+        //creates new product
+        const newOrder = await new OrderList({
+            itemName: targetProduct.itemName,
+            itemID: targetProduct._id,
+            proofOfPaymentImage: proofOfPayment.secure_url,
+            studentName: studentFullname,
+            studentLMSID: student.lmsURN,
+        })
+
+        if(newOrder){
+            await newOrder.save();
+            res.status(200).json(newOrder);
+        }else{
+            res.status(400).json({message:"Invalid user data"});
+        }
+    }catch (error){
+        console.log("error in orderProduct controller");
+        res.status(500).json({message:"Internal server Error"});
+    }
+}
