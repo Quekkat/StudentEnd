@@ -1,0 +1,227 @@
+/* Navbar container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 6px 16px;
+  height: 64px;
+  backdrop-filter: blur(6px);
+}
+
+/* Common navbar section layout */
+.navbar-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-left {
+  justify-content: flex-start;
+}
+
+.navbar-logo {
+  height: 48px;
+  width: auto;
+}
+
+.navbar-center {
+  justify-content: center;
+  gap: 16px;
+}
+
+.navbar-right {
+  justify-content: flex-end;
+  gap: 10px;
+  margin-right: 40px;
+}
+
+.navbar-right .nav-link:first-child {
+  margin-right: 18px;
+}
+
+.nav-link {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.material-symbols-rounded {
+  font-size: 22px;
+  vertical-align: middle;
+  color: #fff;
+}
+
+.search-input {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 15px;
+  color: white;
+  width: 180px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: #ddd;
+}
+
+.search-input:focus {
+  border-color: #fff;
+}
+
+/* Main row: welcome + image side by side */
+.welcome-main-row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 40px;
+  padding: 60px 40px;
+  flex-wrap: wrap;
+}
+
+/* Left side */
+.welcome-section {
+  flex: 1;
+  max-width: 520px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  box-shadow: 0 6px 32px rgba(40, 40, 70, 0.1);
+  text-align: center;
+  color: #fff;
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Right side */
+.welcome-image-container {
+  flex: 1;
+  max-width: 520px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  max-height: 100%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  opacity: 0.75; /* Make the image a little transparent */
+  transition: opacity 0.2s;
+}
+
+/* Welcome texts */
+.welcome-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  letter-spacing: 1px;
+}
+
+.welcome-subtitle {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 1.1rem;
+  color: black;
+}
+
+.welcome-desc {
+  font-size: 1.08rem;
+  color: black;
+  margin-bottom: 2rem;
+}
+
+/* Welcome buttons */
+.welcome-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.welcome-btn {
+  padding: 0.85rem 2.1rem;
+  border-radius: 24px;
+  border: none;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, transform 0.13s;
+  box-shadow: 0 2px 8px rgba(100, 108, 255, 0.08);
+}
+
+.all-products-btn {
+  background: linear-gradient(90deg, #646cff 60%, #7e8fff 100%);
+  color: #fff;
+}
+
+.all-products-btn:hover {
+  background: transparent;
+  color: #646cff;
+}
+
+.cart-btn {
+  background: transparent;
+  color: #646cff;
+  border: 1px solid #646cff;
+  box-shadow: none;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+}
+
+.cart-btn:hover {
+  background: #646cff;
+  color: #fff;
+  border: 1px solid #646cff;
+  transform: translateY(-2px);
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 700px) {
+  .welcome-main-row {
+    flex-direction: column;
+    gap: 24px;
+    padding: 30px 20px;
+  }
+
+  .welcome-section,
+  .welcome-image-container {
+    max-width: 100%;
+  }
+
+  .welcome-image {
+    max-height: 300px;
+  }
+
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+
+  .welcome-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .welcome-desc {
+    font-size: 0.98rem;
+  }
+
+  .welcome-btn {
+    font-size: 0.98rem;
+    padding: 0.7rem 1.1rem;
+  }
+}

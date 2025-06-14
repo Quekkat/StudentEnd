@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './App.css'
+
 import {useStore} from "./GlobalVariables";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoutes  from './ProtectedRoutes';
