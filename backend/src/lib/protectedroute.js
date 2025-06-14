@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import Student from "../models/studentmodel";
+import Student from "../models/studentmodel.js";
 
 export const protectRoutes=async (request,response,next)=>{
     try{
