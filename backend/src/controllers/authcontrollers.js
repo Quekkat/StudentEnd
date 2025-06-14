@@ -1,6 +1,11 @@
-import { generateToken } from "../lib/utility.js";
-import Student from "../models/studentmodel.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import Teacher from "../models/teachersmodel.js";
+import Student from "../models/studentmodel.js";
+import OrderList from "../models/orderlistmodel.js";
+import Inventory from "../models/inventorymodel.js"
+import { generateToken } from "../lib/utility.js";
+import cloudinary from "../lib/cloudinary.js";
 
 export const signup = async (req,res)=>{
     const {URN, URNPassword, FName, LName, Section, Year}=req.body;
@@ -64,6 +69,16 @@ export const logout =(req,res)=>{
         res.status(200).json({message:"logged out"});
     }catch(error){
         console.log("Error in logout controller:", error.message);
+        res.status(500).json({message:"Internal server Error"});
+    }
+}
+export const seeProductList = async (req,res) =>{
+    try{
+        const inventory = await Inventory.find({isForSale:true});
+        if(inventory.length <=0) return res.status(400).json({message: "Inventory is empty"});
+        return res.status(200).json(inventory);
+    }catch(error){
+        console.log("error in seeProductList controller");
         res.status(500).json({message:"Internal server Error"});
     }
 }
