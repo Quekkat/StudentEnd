@@ -60,13 +60,13 @@ const DashboardTab = () => {
             <div className="welcome-buttons">
               <button
                 className="welcome-btn all-products-btn"
-                onClick={() => setWidgetTab("shop")}
+                onClick={() => handleNavClick("shop")}
               >
                 All Products
               </button>
               <button
                 className="welcome-btn cart-btn"
-                onClick={() => setWidgetTab("cart")}
+                onClick={() => handleNavClick("cart")}
               >
                 Cart
               </button>
