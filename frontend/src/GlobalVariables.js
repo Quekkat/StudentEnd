@@ -4,6 +4,7 @@ import { axiosInstance } from "./axios";
 export const useStore = create((set, get) => ({
   authUser: true, // change to null if you connect to backend later
   widgetTab: "home", // default tab is home
+  cart: [], // Add this line
 
   login: async (data) => {
     try {
@@ -27,4 +28,7 @@ export const useStore = create((set, get) => ({
   setWidgetTab: (tab) => {
     set({ widgetTab: tab });
   },
+
+  // Add setCart function
+  setCart: (cart) => set({ cart }),
 }));

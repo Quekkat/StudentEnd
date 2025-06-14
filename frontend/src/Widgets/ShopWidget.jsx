@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./ShopWidget.css";
 import productImg from "../assets/nihguh.jpg";
 import { useStore } from "../GlobalVariables";
 
 const ShopWidget = () => {
-  const { setWidgetTab, cart, setCart } = useStore();
+  const { cart, setCart } = useStore();
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     document.body.classList.add("shop-no-bg");
@@ -15,11 +16,20 @@ const ShopWidget = () => {
 
   const handleAddToCart = (product) => {
     setCart([...cart, { ...product, img: productImg }]);
-    setWidgetTab("cart");
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
   };
 
   return (
     <div className="shop-bg">
+      {showAlert && (
+        <div className="shop-alert">
+          <span className="material-symbols-rounded">check_circle</span>
+          Added to cart
+        </div>
+      )}
       <h1 className="shop-title">All Products</h1>
       <div className="shop-list">
         <div className="shop-list-card">
