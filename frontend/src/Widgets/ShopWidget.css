@@ -34,12 +34,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: box-shadow 0.18s, transform 0.13s;
 }
 
-.shop-card:hover {
-  box-shadow: 0 6px 24px rgba(100,108,255,0.13);
-  transform: translateY(-4px) scale(1.03);
+.shop-card-img-wrap {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.shop-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.18s;
+}
+
+.shop-card-img-wrap:hover .shop-card-img {
+  transform: scale(1.13);
 }
 
 .shop-card-name {
@@ -50,14 +67,49 @@
   text-align: center;
 }
 
-.shop-card-price {
-  font-size: 1.1rem;
-  color: #646cff;
-  font-weight: 500;
-  text-align: center;
+.shop-card-bottom {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.5rem;
 }
 
-/* Responsive */
+.shop-card-price {
+  font-size: 1.18rem;   /* slightly larger */
+  color: #646cff;
+  font-weight: 700;     /* make it bold */
+  text-align: center;
+  margin-right: 0.7rem;
+}
+
+.shop-card-cart-btn {
+  background: #646cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem 0.5rem 0.7rem;
+  cursor: pointer;
+  font-size: 1.08rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.18s, color 0.18s, transform 0.13s;
+}
+
+.shop-card-cart-btn:hover {
+  background: #4b50c7;
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.shop-card-cart-text {
+  font-weight: 600;
+  font-size: 1.08rem;
+  margin-left: 0.3rem;
+}
+
 @media (max-width: 700px) {
   .shop-title {
     font-size: 1.3rem;
@@ -71,9 +123,13 @@
   .shop-card {
     padding: 1.2rem 0.7rem 1rem 0.7rem;
   }
+  .shop-card-img-wrap {
+    width: 70px;
+    height: 70px;
+  }
 }
 
 body.shop-no-bg {
-  background: #fff !important;
-  background-image: none !important;
+  background: #fff;
+  background-image: none;
 }

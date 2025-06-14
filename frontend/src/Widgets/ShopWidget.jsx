@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "./ShopWidget.css";
+import productImg from "../assets/nihguh.jpg";
 
 const products = [
   { name: "PE Uniform", price: "₱350" },
@@ -15,7 +16,6 @@ const products = [
 ];
 
 const ShopWidget = () => {
-
   useEffect(() => {
     document.body.classList.add("shop-no-bg");
     return () => {
@@ -29,8 +29,17 @@ const ShopWidget = () => {
       <div className="shop-card-grid">
         {products.map((item, idx) => (
           <div className="shop-card" key={idx}>
+            <div className="shop-card-img-wrap">
+              <img src={productImg} alt={item.name} className="shop-card-img" />
+            </div>
             <div className="shop-card-name">{item.name}</div>
-            <div className="shop-card-price">{item.price}</div>
+            <div className="shop-card-bottom">
+              <div className="shop-card-price">{item.price}</div>
+              <button className="shop-card-cart-btn">
+                <span className="material-symbols-rounded">shopping_cart</span>
+                <span className="shop-card-cart-text">Add</span>
+              </button>
+            </div>
           </div>
         ))}
       </div>
