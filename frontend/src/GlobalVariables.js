@@ -2,9 +2,9 @@ import { create } from "zustand";
 import { axiosInstance } from "./axios";
 
 export const useStore = create((set, get) => ({
-  authUser: true, // change to null if you connect to backend later
-  widgetTab: "home", // default tab is home
-  cart: [], // Add this line
+  authUser: true, // change to null if you want to cum later
+  widgetTab: "home", // default tab is fucking home
+  cart: [], // Add this nigga line
 
   login: async (data) => {
     try {
@@ -29,6 +29,6 @@ export const useStore = create((set, get) => ({
     set({ widgetTab: tab });
   },
 
-  // Add setCart function
+  // Add setCart nigga function
   setCart: (cart) => set({ cart }),
 }));
