@@ -49,7 +49,11 @@ const DashboardTab = () => {
             placeholder="Search products"
             className="search-input"
             onChange={(e) => {
-              useStore.getState().setSearchQuery(e.target.value);
+              // Get the current store state
+              const store = useStore.getState();
+              // Update search query
+              store.setSearchQuery(e.target.value);
+              // Navigate to shop if not already there
               if (widgetTab !== "shop") {
                 setWidgetTab("shop");
               }
@@ -95,7 +99,11 @@ const DashboardTab = () => {
           placeholder="Search products"
           className="search-input mobile-search"
           onChange={(e) => {
-            useStore.getState().setSearchQuery(e.target.value);
+            // Get the current store state
+            const store = useStore.getState();
+            // Update search query
+            store.setSearchQuery(e.target.value);
+            // Navigate to shop if not already there and if there's a query
             if (e.target.value && widgetTab !== "shop") {
               setWidgetTab("shop");
             }

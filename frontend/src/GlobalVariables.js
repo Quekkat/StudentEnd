@@ -5,6 +5,10 @@ export const useStore = create((set, get) => ({
   authUser: true, // change to null if you want to cum later
   widgetTab: "home", // default tab is fucking home
   cart: [], // Add this nigga line
+  searchQuery: "", // Add this line to properly store search query
+
+  // Add proper setSearchQuery function
+  setSearchQuery: (query) => set({ searchQuery: query }),
 
   login: async (data) => {
     try {

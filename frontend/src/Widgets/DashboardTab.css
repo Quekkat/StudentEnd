@@ -96,8 +96,8 @@
   height: 36px; /* Reduced height */
   outline: none;
   transition: all 0.2s ease;
-  caret-color: white; /* Makes the text cursor visible */
-  cursor: text; /* Ensures the mouse cursor is the text cursor */
+  caret-color: white; /* Makes text cursor visible */
+  cursor: text; /* Ensures mouse cursor shows as text input */
 }
 
 .search-input::placeholder {
