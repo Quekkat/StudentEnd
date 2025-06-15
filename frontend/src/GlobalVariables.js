@@ -7,6 +7,8 @@ export const useStore = create((set, get) => ({
   cart: [], // Add this nigga line
   searchQuery: "", // Add this line to properly store search query
   itemList:[],
+  itemsBoughtList:[],// list of item bought
+  orderingItem:null,
 
   // Add proper setSearchQuery function
   setSearchQuery: (query) => set({ searchQuery: query }),
@@ -84,5 +86,9 @@ export const useStore = create((set, get) => ({
   
   // Add setCart nigga function
   setCart: (cart) => set({ cart }),
+  gotoOrderPage: (item)=>{
+    set({orderingItem: item});
+    set({widgetTab:"ordering"});
+  },
   
 }));

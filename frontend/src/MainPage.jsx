@@ -2,6 +2,7 @@ import BoughtWidget from "./Widgets/BoughtWidget";
 import DashboardTab from "./Widgets/DashboardTab";
 import ShopWidget from "./Widgets/ShopWidget";
 import { useStore } from "./GlobalVariables";
+import ItemBoughtListWidget from "./Widgets/ItemsBoughtListWidget";
 
 const MainPage = ()=>{
     const{widgetTab} = useStore();
@@ -14,7 +15,8 @@ const MainPage = ()=>{
             <div>
                 
                 {widgetTab ==="shop" && <ShopWidget/>}
-                {widgetTab ==="cart" && <BoughtWidget/>}
+                {widgetTab ==="cart" && <ItemBoughtListWidget/>}
+                {widgetTab ==="ordering" && <BoughtWidget/>}
             </div>
         </div>
     );
