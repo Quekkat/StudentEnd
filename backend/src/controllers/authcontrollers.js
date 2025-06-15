@@ -115,3 +115,29 @@ export const orderProduct = async (req,res) =>{
         res.status(500).json({message:"Internal server Error"});
     }
 }
+export const seeOrderedProducts = async (req,res)=>{
+    try{
+        const student = req.student;
+        const orderList = await OrderList.find({studentUID: student._id, received: false});
+        if(orderList<=0) return res.status(404).json({message: "The student havent ordered anything yet"});
+        res.status(200).json(orderList);
+
+    }catch(error){
+        console.log("error in seeOderedProducts controller");
+        res.status(500).json({message:"Internal server Error"});
+
+    }
+}
+
+export const cancelOrder = async (req,res)=>{
+    try{
+        const {ID} = req.body;
+        if(!ID) return res.status(400).json({message:"No order provided"});
+        const deletedOrder = await OrderList.findByIdAndDelete(ID);
+        if(!deletedOrder) return res.status(404).json({message: "Order doesnt exist"});
+        res.status(200).json({deleted: ID});
+    }catch(error){
+        console.log("error in seeOderedProducts controller");
+        res.status(500).json({message:"Internal server Error"});
+    }
+}

@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
     paymentVerified:{
         type: Boolean,
         default:false,
+    },
+    received:{
+        type: Boolean,
+        default: false,
     }
 },{timestamps:true});
 //date ordered comes from timestamp
