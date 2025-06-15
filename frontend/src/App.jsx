@@ -13,7 +13,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/login" element ={!authUser? <Login/>: <Navigate to="/"/>} />
-        <Route path="/signin" element ={!authUser? <Signup/>: <Navigate to ="/"/>}/>
+        <Route path="/signup" element={!authUser ? <Signup/> : <Navigate to="/"/>}/>
         
         <Route element ={<ProtectedRoutes/>}>
           <Route element ={<MainPage/>} path="/"/>

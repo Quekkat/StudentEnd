@@ -7,23 +7,32 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+/* Add this container to center the form */
+.login-container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
 }
 
 .login-form {
     background: rgba(0, 0, 0, 0.78);
-    padding: 2.2rem 1.7rem 1.7rem 1.7rem;
+    padding: 2.2rem 1.8rem;
     border-radius: 20px;
-    box-shadow: 0 12px 40px rgba(40,40,70,0.22);
+    box-shadow: 0 12px 40px rgba(40, 40, 70, 0.22);
     display: flex;
     flex-direction: column;
     min-width: 320px;
-    max-width: 340px;
+    max-width: 360px;
     width: 100%;
-    min-height: 320px;
-    max-height: 420px;
     backdrop-filter: blur(2px);
     align-items: stretch;
-    margin: 40px auto;
+    margin: 0; /* Remove margins since we're using flex centering */
 }
 
 .login-header {
@@ -127,36 +136,48 @@ body {
 /* Responsive styles for mobile */
 @media (max-width: 600px) {
     .login-form {
-        min-width: 90vw;
-        max-width: 95vw;
-        padding: 1.2rem 0.7rem 1.2rem 0.7rem;
-        border-radius: 14px;
-        margin: 20px auto;
+        min-width: 85%;
+        max-width: 95%;
+        padding: 1.8rem 1.4rem;
+        border-radius: 16px;
     }
 
     .login-header h1 {
-        font-size: 1.3rem;
+        font-size: 1.8rem;
     }
 
     .login-input {
-        font-size: 0.98rem;
-        padding: 0.7rem 2.3rem 0.7rem 0.9rem;
-        border-radius: 22px;
+        font-size: 1rem;
+        padding: 0.8rem 2.5rem 0.8rem 1rem;
+        border-radius: 24px;
     }
 
     .login-input-icon {
-        font-size: 1.4rem;
-        right: 0.7rem;
+        font-size: 1.6rem;
+        right: 0.8rem;
     }
 
     .login-btn {
-        font-size: 0.98rem;
-        padding: 0.7rem;
-        border-radius: 20px;
+        font-size: 1rem;
+        padding: 0.9rem;
+        border-radius: 24px;
+        height: 50px; /* Taller button for better touch target */
     }
 
     .login-bottom-text {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* For very small devices */
+@media (max-width: 320px) {
+    .login-form {
+        min-width: 92%;
+        padding: 1.5rem 1.2rem;
+    }
+    
+    .login-header h1 {
+        font-size: 1.6rem;
     }
 }
 
