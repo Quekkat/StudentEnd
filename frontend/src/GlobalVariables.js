@@ -2,9 +2,16 @@ import { create } from "zustand";
 import { axiosInstance } from "./axios";
 
 export const useStore = create((set, get) => ({
-  authUser: null, // change to null if you want to cum later
+  authUser: true, // change to null if you want to cum later
   widgetTab: "home", // default tab is fucking home
   cart: [], // Add this nigga line
+  searchQuery: "", // Add search query state
+
+  // Add setAuthUser function
+  setAuthUser: (user) => set({ authUser: user }),
+
+  // Add search function
+  setSearchQuery: (query) => set({ searchQuery: query }),
 
   login: async (data) => {
     try {

@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useForm, ValidationError } from "@formspree/react";
+import { useNavigate } from "react-router-dom";
 import "./DashboardTab.css";
 import logo from "../assets/logo.png";
 import hitleer from "../assets/hitleer.jpg";
 import { useStore } from "../GlobalVariables";
 
 const DashboardTab = () => {
-  const { widgetTab, setWidgetTab } = useStore();
+  const { widgetTab, setWidgetTab, setAuthUser } = useStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [state, handleSubmit] = useForm("xwpbbool"); // Replace with your Formspree ID
+  const [state, handleSubmit] = useForm("xwpbbool");
+  const navigate = useNavigate();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -18,6 +20,11 @@ const DashboardTab = () => {
     setWidgetTab(tab);
     scrollToTop();
     setIsMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    setAuthUser(null);
+    navigate("/login");
   };
 
   return (
@@ -41,14 +48,31 @@ const DashboardTab = () => {
             type="text"
             placeholder="Search products"
             className="search-input"
+            onChange={(e) => {
+              useStore.getState().setSearchQuery(e.target.value);
+              if (widgetTab !== "shop") {
+                setWidgetTab("shop");
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && widgetTab !== "shop") {
+                setWidgetTab("shop");
+              }
+            }}
           />
         </div>
+
+        {/* Right section with All Products, cart and logout buttons */}
         <div className="navbar-section navbar-right desktop-only">
           <button className="nav-link" onClick={() => handleNavClick("shop")}>
             All Products
           </button>
           <button className="nav-link" onClick={() => handleNavClick("cart")}>
             <span className="material-symbols-rounded">shopping_cart</span>
+          </button>
+          <button className="nav-link logout-btn" onClick={handleLogout}>
+            <span className="material-symbols-rounded">logout</span>
+            Logout
           </button>
         </div>
 
@@ -61,11 +85,27 @@ const DashboardTab = () => {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - keep the same organization as desktop */}
       <div className={`mobile-menu ${isMenuOpen ? "open" : ""}`}>
         <button className="nav-link" onClick={() => handleNavClick("home")}>
           Home
         </button>
+        <input
+          type="text"
+          placeholder="Search products"
+          className="search-input mobile-search"
+          onChange={(e) => {
+            useStore.getState().setSearchQuery(e.target.value);
+            if (e.target.value && widgetTab !== "shop") {
+              setWidgetTab("shop");
+            }
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && widgetTab !== "shop") {
+              setWidgetTab("shop");
+            }
+          }}
+        />
         <button className="nav-link" onClick={() => handleNavClick("shop")}>
           All Products
         </button>
@@ -73,11 +113,10 @@ const DashboardTab = () => {
           <span className="material-symbols-rounded">shopping_cart</span>
           Cart
         </button>
-        <input
-          type="text"
-          placeholder="Search products"
-          className="search-input mobile-search"
-        />
+        <button className="nav-link mobile-logout" onClick={handleLogout}>
+          <span className="material-symbols-rounded">logout</span>
+          Logout
+        </button>
       </div>
 
       {widgetTab === "home" && (

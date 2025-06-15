@@ -4,8 +4,23 @@ import productImg from "../assets/nihguh.jpg";
 import { useStore } from "../GlobalVariables";
 
 const ShopWidget = () => {
-  const { cart, setCart } = useStore();
+  const { cart, setCart, searchQuery } = useStore();
   const [showAlert, setShowAlert] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  // Define all products
+  const products = [
+    { name: "PE Uniform", price: 350, img: productImg },
+    { name: "Event T-Shirt", price: 250, img: productImg },
+    { name: "ID Lace", price: 50, img: productImg },
+    { name: "School Jacket", price: 700, img: productImg },
+    { name: "Notebook", price: 40, img: productImg },
+    { name: "Ballpen", price: 20, img: productImg },
+    { name: "Vision Mug", price: 120, img: productImg },
+    { name: "Vision Cap", price: 180, img: productImg },
+    { name: "Vision Bag", price: 400, img: productImg },
+    { name: "Vision Patch", price: 60, img: productImg },
+  ];
 
   useEffect(() => {
     document.body.classList.add("shop-no-bg");
@@ -14,12 +29,25 @@ const ShopWidget = () => {
     };
   }, []);
 
+  // Filter products when search query changes
+  useEffect(() => {
+    if (!searchQuery) {
+      setFilteredProducts(products);
+    } else {
+      const filtered = products.filter((product) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+    }
+  }, [searchQuery]);
+
   const handleAddToCart = (product) => {
     setCart([...cart, { ...product, img: productImg }]);
     setShowAlert(true);
+
     setTimeout(() => {
       setShowAlert(false);
-    }, 2000);
+    }, 1500);
   };
 
   return (
@@ -30,197 +58,50 @@ const ShopWidget = () => {
           Added to cart
         </div>
       )}
-      <h1 className="shop-title">All Products</h1>
+      <h1 className="shop-title">
+        {searchQuery ? `Search Results for "${searchQuery}"` : "All Products"}
+      </h1>
+
+      {/* Show search results count if searching */}
+      {searchQuery && (
+        <p className="search-results-count">
+          {filteredProducts.length}{" "}
+          {filteredProducts.length === 1 ? "item" : "items"} found
+        </p>
+      )}
+
+      {/* Display message if no results found */}
+      {filteredProducts.length === 0 && searchQuery && (
+        <div className="no-results">
+          <p>No products found matching "{searchQuery}"</p>
+        </div>
+      )}
+
       <div className="shop-list">
-        <div className="shop-list-card">
-          <div className="shop-list-img-wrap">
-            <img src={productImg} alt="PE Uniform" className="shop-list-img" />
-          </div>
-          <div className="shop-list-info">
-            <div className="shop-list-name">PE Uniform</div>
-            <div className="shop-list-bottom">
-              <div className="shop-list-price">₱350</div>
-              <button
-                className="shop-list-cart-btn"
-                onClick={() => handleAddToCart({ name: "PE Uniform", price: 350 })}
-              >
-                <span className="material-symbols-rounded">shopping_cart</span>
-                <span className="shop-list-cart-text">Add</span>
-              </button>
+        {filteredProducts.map((product, index) => (
+          <div className="shop-list-card" key={index}>
+            <div className="shop-list-img-wrap">
+              <img
+                src={product.img}
+                alt={product.name}
+                className="shop-list-img"
+              />
+            </div>
+            <div className="shop-list-info">
+              <div className="shop-list-name">{product.name}</div>
+              <div className="shop-list-bottom">
+                <div className="shop-list-price">₱{product.price}</div>
+                <button
+                  className="shop-list-cart-btn"
+                  onClick={() => handleAddToCart(product)}
+                >
+                  <span className="material-symbols-rounded">shopping_cart</span>
+                  <span className="shop-list-cart-text">Add</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="shop-list-card">
-          <div className="shop-list-img-wrap">
-            <img src={productImg} alt="Event T-Shirt" className="shop-list-img" />
-          </div>
-          <div className="shop-list-info">
-            <div className="shop-list-name">Event T-Shirt</div>
-            <div className="shop-list-bottom">
-              <div className="shop-list-price">₱250</div>
-              <button
-                className="shop-list-cart-btn"
-                onClick={() => handleAddToCart({ name: "Event T-Shirt", price: 250 })}
-              >
-                <span className="material-symbols-rounded">shopping_cart</span>
-                <span className="shop-list-cart-text">Add</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="shop-list-card">
-          <div className="shop-list-img-wrap">
-            <img src={productImg} alt="ID Lace" className="shop-list-img" />
-          </div>
-          <div className="shop-list-info">
-            <div className="shop-list-name">ID Lace</div>
-            <div className="shop-list-bottom">
-              <div className="shop-list-price">₱50</div>
-              <button
-                className="shop-list-cart-btn"
-                onClick={() => handleAddToCart({ name: "ID Lace", price: 50 })}
-              >
-                <span className="material-symbols-rounded">shopping_cart</span>
-                <span className="shop-list-cart-text">Add</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="shop-list-card">
-          <div className="shop-list-img-wrap">
-            <img src={productImg} alt="School Jacket" className="shop-list-img" />
-          </div>
-          <div className="shop-list-info">
-            <div className="shop-list-name">School Jacket</div>
-            <div className="shop-list-bottom">
-              <div className="shop-list-price">₱700</div>
-              <button
-                className="shop-list-cart-btn"
-                onClick={() => handleAddToCart({ name: "School Jacket", price: 700 })}
-              >
-                <span className="material-symbols-rounded">shopping_cart</span>
-                <span className="shop-list-cart-text">Add</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="shop-list-card">
-          <div className="shop-list-img-wrap">
-            <img src={productImg} alt="Notebook" className="shop-list-img" />
-          </div>
-          <div className="shop-list-info">
-            <div className="shop-list-name">Notebook</div>
-            <div className="shop-list-bottom">
-              <div className="shop-list-price">₱40</div>
-              <button
-                className="shop-list-cart-btn"
-                onClick={() => handleAddToCart({ name: "Notebook", price: 40 })}
-              >
-                <span className="material-symbols-rounded">shopping_cart</span>
-                <span className="shop-list-cart-text">Add</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="shop-list-card">
-          <div className="shop-list-img-wrap">
-            <img src={productImg} alt="Ballpen" className="shop-list-img" />
-          </div>
-          <div className="shop-list-info">
-            <div className="shop-list-name">Ballpen</div>
-            <div className="shop-list-bottom">
-              <div className="shop-list-price">₱20</div>
-              <button
-                className="shop-list-cart-btn"
-                onClick={() => handleAddToCart({ name: "Ballpen", price: 20 })}
-              >
-                <span className="material-symbols-rounded">shopping_cart</span>
-                <span className="shop-list-cart-text">Add</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="shop-list-card">
-          <div className="shop-list-img-wrap">
-            <img src={productImg} alt="Vision Mug" className="shop-list-img" />
-          </div>
-          <div className="shop-list-info">
-            <div className="shop-list-name">Vision Mug</div>
-            <div className="shop-list-bottom">
-              <div className="shop-list-price">₱120</div>
-              <button
-                className="shop-list-cart-btn"
-                onClick={() => handleAddToCart({ name: "Vision Mug", price: 120 })}
-              >
-                <span className="material-symbols-rounded">shopping_cart</span>
-                <span className="shop-list-cart-text">Add</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="shop-list-card">
-          <div className="shop-list-img-wrap">
-            <img src={productImg} alt="Vision Cap" className="shop-list-img" />
-          </div>
-          <div className="shop-list-info">
-            <div className="shop-list-name">Vision Cap</div>
-            <div className="shop-list-bottom">
-              <div className="shop-list-price">₱180</div>
-              <button
-                className="shop-list-cart-btn"
-                onClick={() => handleAddToCart({ name: "Vision Cap", price: 180 })}
-              >
-                <span className="material-symbols-rounded">shopping_cart</span>
-                <span className="shop-list-cart-text">Add</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="shop-list-card">
-          <div className="shop-list-img-wrap">
-            <img src={productImg} alt="Vision Bag" className="shop-list-img" />
-          </div>
-          <div className="shop-list-info">
-            <div className="shop-list-name">Vision Bag</div>
-            <div className="shop-list-bottom">
-              <div className="shop-list-price">₱400</div>
-              <button
-                className="shop-list-cart-btn"
-                onClick={() => handleAddToCart({ name: "Vision Bag", price: 400 })}
-              >
-                <span className="material-symbols-rounded">shopping_cart</span>
-                <span className="shop-list-cart-text">Add</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="shop-list-card">
-          <div className="shop-list-img-wrap">
-            <img src={productImg} alt="Vision Patch" className="shop-list-img" />
-          </div>
-          <div className="shop-list-info">
-            <div className="shop-list-name">Vision Patch</div>
-            <div className="shop-list-bottom">
-              <div className="shop-list-price">₱60</div>
-              <button
-                className="shop-list-cart-btn"
-                onClick={() => handleAddToCart({ name: "Vision Patch", price: 60 })}
-              >
-                <span className="material-symbols-rounded">shopping_cart</span>
-                <span className="shop-list-cart-text">Add</span>
-              </button>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

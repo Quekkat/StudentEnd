@@ -24,6 +24,7 @@
 
 .navbar-left {
   justify-content: flex-start;
+  gap: 12px;
 }
 
 .navbar-logo {
@@ -44,12 +45,22 @@
 
 .navbar-right {
   justify-content: flex-end;
-  gap: 10px;
-  margin-right: 40px;
+  gap: 24px; /* Increased gap between items */
+  margin-right: 30px; /* More space on right */
+  position: relative;
+}
+
+.navbar-right .nav-link {
+  padding: 6px 10px;
 }
 
 .navbar-right .nav-link:first-child {
   margin-right: 18px;
+}
+
+.navbar-right .nav-link:nth-child(1),
+.navbar-right .nav-link:nth-child(2) {
+  margin-right: 10px; /* Move these two buttons slightly left */
 }
 
 .nav-link {
@@ -85,6 +96,8 @@
   height: 36px; /* Reduced height */
   outline: none;
   transition: all 0.2s ease;
+  caret-color: white; /* Makes the text cursor visible */
+  cursor: text; /* Ensures the mouse cursor is the text cursor */
 }
 
 .search-input::placeholder {
@@ -213,6 +226,21 @@
   transform: translateY(-2px);
 }
 
+/* Logout button styling */
+.logout-btn {
+  background-color: transparent; /* Changed from rgba(255, 59, 48, 0.1) to transparent */
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Changed to white transparent background */
+}
+
 /* Mobile Menu Button */
 .mobile-menu-btn {
   display: none;
@@ -305,10 +333,11 @@
 
 /* Update the responsive styles */
 @media (max-width: 768px) {
-  .desktop-only {
-    display: none !important;
+  .navbar .desktop-only,
+  .navbar-section.desktop-only {
+    display: none;
   }
-
+  
   .mobile-menu-btn {
     display: flex;
     align-items: center;
