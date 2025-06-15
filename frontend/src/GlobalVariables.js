@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { axiosInstance } from "./axios";
 
 export const useStore = create((set, get) => ({
-  authUser: true, // change to null if you want to cum later
+  authUser: null, // change to null if you want to cum later
   widgetTab: "home", // default tab is fucking home
   cart: [], // Add this nigga line
 

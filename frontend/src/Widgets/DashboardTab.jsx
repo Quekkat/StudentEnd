@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import "./DashboardTab.css";
 import logo from "../assets/logo.png";
 import hitleer from "../assets/hitleer.jpg";
@@ -7,6 +8,7 @@ import { useStore } from "../GlobalVariables";
 const DashboardTab = () => {
   const { widgetTab, setWidgetTab } = useStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [state, handleSubmit] = useForm("xwpbbool"); // Replace with your Formspree ID
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -79,38 +81,99 @@ const DashboardTab = () => {
       </div>
 
       {widgetTab === "home" && (
-        <div className="welcome-main-row">
-          <section className="welcome-section">
-            <h1 className="welcome-title">Welcome on Vision Academy</h1>
-            <h2 className="welcome-subtitle">Inventory</h2>
-            <p className="welcome-desc">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi
-              consectetur nisi, eu consectetur nisl nisi euismod nisi.
-            </p>
-            <div className="welcome-buttons">
-              <button
-                className="welcome-btn all-products-btn"
-                onClick={() => handleNavClick("shop")}
-              >
-                All Products
-              </button>
-              <button
-                className="welcome-btn cart-btn"
-                onClick={() => handleNavClick("cart")}
-              >
-                Cart
-              </button>
+        <>
+          <div className="welcome-main-row">
+            <section className="welcome-section">
+              <h1 className="welcome-title">Welcome on Vision Academy</h1>
+              <h2 className="welcome-subtitle">Inventory</h2>
+              <p className="welcome-desc">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi
+                consectetur nisi, eu consectetur nisl nisi euismod nisi.
+              </p>
+              <div className="welcome-buttons">
+                <button
+                  className="welcome-btn all-products-btn"
+                  onClick={() => handleNavClick("shop")}
+                >
+                  All Products
+                </button>
+                <button
+                  className="welcome-btn cart-btn"
+                  onClick={() => handleNavClick("cart")}
+                >
+                  Cart
+                </button>
+              </div>
+            </section>
+            <div className="welcome-image-container">
+              <img
+                src={hitleer}
+                alt="Vision Academy"
+                className="welcome-image"
+              />
             </div>
-          </section>
-          <div className="welcome-image-container">
-            <img
-              src={hitleer}
-              alt="Vision Academy"
-              className="welcome-image"
-            />
           </div>
-        </div>
+
+          <div className="contact-section">
+            <h1 className="contact-title">Have a question?</h1>
+            {state.succeeded ? (
+              <div className="contact-success">
+                <span className="material-symbols-rounded">check_circle</span>
+                Thanks! Your message has been sent.
+              </div>
+            ) : (
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="contact-input-group">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    className="contact-input"
+                    required
+                  />
+                </div>
+                <div className="contact-input-group">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    className="contact-input"
+                    required
+                  />
+                  <ValidationError
+                    prefix="Email"
+                    field="email"
+                    errors={state.errors}
+                    className="contact-error"
+                  />
+                </div>
+                <div className="contact-input-group">
+                  <textarea
+                    name="message"
+                    placeholder="Your Message"
+                    className="contact-input contact-textarea"
+                    rows="4"
+                    required
+                  ></textarea>
+                  <ValidationError
+                    prefix="Message"
+                    field="message"
+                    errors={state.errors}
+                    className="contact-error"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="contact-submit"
+                  disabled={state.submitting}
+                >
+                  {state.submitting ? "Sending..." : "Submit"}
+                </button>
+              </form>
+            )}
+          </div>
+        </>
       )}
     </>
   );
