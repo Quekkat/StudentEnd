@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./ShopWidget.css";
 import productImg from "../assets/nihguh.jpg";
 import { useStore } from "../GlobalVariables";
+import ShopWidgetCard from "./ShopWidgetCard";
 
 const ShopWidget = () => {
   const { cart, setCart, searchQuery } = useStore();
@@ -12,6 +13,7 @@ const ShopWidget = () => {
   //runs once to load item list from db:
   useEffect(()=>{
     getItemList();
+    setFilteredProducts(itemList);
   },[])
 
   // Define all products
@@ -84,29 +86,8 @@ const ShopWidget = () => {
       )}
 
       <div className="shop-list">
-        {filteredProducts.map((product, index) => (
-          <div className="shop-list-card" key={index}>
-            <div className="shop-list-img-wrap">
-              <img
-                src={product.img}
-                alt={product.name}
-                className="shop-list-img"
-              />
-            </div>
-            <div className="shop-list-info">
-              <div className="shop-list-name">{product.name}</div>
-              <div className="shop-list-bottom">
-                <div className="shop-list-price">₱{product.price}</div>
-                <button
-                  className="shop-list-cart-btn"
-                  onClick={() => handleAddToCart(product)}
-                >
-                  <span className="material-symbols-rounded">shopping_cart</span>
-                  <span className="shop-list-cart-text">Add</span>
-                </button>
-              </div>
-            </div>
-          </div>
+        {filteredProducts.map((product) => (
+          <ShopWidgetCard key={product._id} item={product}/>
         ))}
       </div>
     </div>

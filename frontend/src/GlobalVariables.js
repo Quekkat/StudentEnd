@@ -47,6 +47,7 @@ export const useStore = create((set, get) => ({
     try{
       const res = await axiosInstance.get("/auth/products");
       set({itemList:res.data});
+      console.log(res.data);
     }catch(error){
       console.log(error.response.data.message);
     }
