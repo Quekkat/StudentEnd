@@ -16,7 +16,11 @@ const BoughtWidget = () => {
   }, []);
 
   // Calculate total price of all products in cart
-  const totalAmount = cart.reduce((total, item) => total + item.price, 0);
+  const totalAmount = cart.reduce((total, item) => {
+    // Handle both formats (from ShopWidget and from API)
+    const price = item.price || 0;
+    return total + price;
+  }, 0);
 
   // Remove product from cart
   const handleRemoveItem = (index) => {
@@ -63,11 +67,6 @@ const BoughtWidget = () => {
       <div className="bought-main-row">
         <div className="bought-left">
           <h1 className="bought-title">Vision Cart</h1>
-          <div className="bought-table-header">
-            <span className="bought-th product-details">Product</span>
-            <span className="bought-th subtotal">QR Code</span>
-            <span className="bought-th action">Action</span>
-          </div>
 
           {/* Display cart items */}
           {cart.length === 0 ? (
@@ -75,39 +74,45 @@ const BoughtWidget = () => {
               <p>Your cart is empty. Add some products!</p>
             </div>
           ) : (
-            cart.map((item, index) => (
-              <div key={index} className="cart-item">
-                {/* Product section */}
-                <div className="product-section">
-                  <div className="product-img-container">
-                    <img src={item.img} alt={item.name} className="product-img" />
+            <div className="cart-items-container">
+              {cart.map((item, index) => (
+                <div key={index} className="cart-item-row">
+                  {/* Product section */}
+                  <div className="cart-item-product">
+                    <div className="product-img-container">
+                      <img 
+                        src={item.itemImgLink || item.img} 
+                        alt={item.itemName || item.name} 
+                        className="product-img" 
+                      />
+                    </div>
+                    <div className="product-details">
+                      <h3 className="product-name">{item.itemName || item.name}</h3>
+                      <p className="product-price">₱{(item.price || 0).toFixed(2)}</p>
+                    </div>
                   </div>
-                  <div className="product-details">
-                    <h3 className="product-name">{item.name}</h3>
-                    <p className="product-price">₱{item.price.toFixed(2)}</p>
+                  
+                  {/* QR code section */}
+                  <div className="cart-item-qr">
+                    <QRCode 
+                      value={`Vision Academy - ${item.itemName || item.name} - ₱${item.price || 0}`} 
+                      size={80} 
+                      className="product-qr"
+                    />
+                  </div>
+                  
+                  {/* Action section */}
+                  <div className="cart-item-action">
+                    <button 
+                      className="remove-item-btn no-hover-bg"
+                      onClick={() => handleRemoveItem(index)}
+                    >
+                      <span className="material-symbols-rounded delete-icon">close</span>
+                    </button>
                   </div>
                 </div>
-                
-                {/* QR code section */}
-                <div className="qr-code-section">
-                  <QRCode 
-                    value={`Vision Academy - ${item.name} - ₱${item.price}`} 
-                    size={120} 
-                    className="product-qr"
-                  />
-                </div>
-                
-                {/* Action section */}
-                <div className="action-section">
-                  <button 
-                    className="remove-item-btn"
-                    onClick={() => handleRemoveItem(index)}
-                  >
-                    <span className="material-symbols-rounded delete-icon">close</span>
-                  </button>
-                </div>
-              </div>
-            ))
+              ))}
+            </div>
           )}
         </div>
 

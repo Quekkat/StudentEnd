@@ -48,16 +48,17 @@ body, html {
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  padding: 24px;  /* Increased padding */
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s, box-shadow 0.2s;
-  min-height: 320px;  /* Added minimum height */
-  justify-content: space-between;  /* Space out content */
+  /* Remove the transform from transition to fix shaking */
+  transition: box-shadow 0.2s;
+  min-height: 320px;
+  justify-content: space-between;
 }
 
 .shop-list-card:hover {
-  transform: translateY(-6px);
+  /* Keep the shadow effect but remove the vertical movement */
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 
@@ -127,11 +128,14 @@ body, html {
   align-items: center;
   gap: 8px;
   transition: all 0.2s;
+  position: relative; /* Add this */
+  z-index: 2; /* Ensure button stays on top */
 }
 
 .shop-list-cart-btn:hover {
   background: #4b50c7;
-  transform: translateY(-2px);
+  /* Use scale instead of translateY for button hover effect */
+  transform: scale(1.05);
 }
 
 .shop-list-cart-text {

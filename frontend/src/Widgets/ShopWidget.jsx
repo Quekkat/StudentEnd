@@ -1,34 +1,18 @@
 import { useEffect, useState } from "react";
 import "./ShopWidget.css";
-import productImg from "../assets/nihguh.jpg";
 import { useStore } from "../GlobalVariables";
 import ShopWidgetCard from "./ShopWidgetCard";
 
 const ShopWidget = () => {
-  const { cart, setCart, searchQuery } = useStore();
-  const [showAlert, setShowAlert] = useState(false);
+  const { searchQuery } = useStore();
   const [filteredProducts, setFilteredProducts] = useState([]);
   const {getItemList, itemList} = useStore();
 
-  //runs once to load item list from db:
+  // Runs once to load item list from db:
   useEffect(()=>{
     getItemList();
     setFilteredProducts(itemList);
   },[])
-
-  // Define all products
-  const products = [
-    { name: "PE Uniform", price: 350, img: productImg },
-    { name: "Event T-Shirt", price: 250, img: productImg },
-    { name: "ID Lace", price: 50, img: productImg },
-    { name: "School Jacket", price: 700, img: productImg },
-    { name: "Notebook", price: 40, img: productImg },
-    { name: "Ballpen", price: 20, img: productImg },
-    { name: "Vision Mug", price: 120, img: productImg },
-    { name: "Vision Cap", price: 180, img: productImg },
-    { name: "Vision Bag", price: 400, img: productImg },
-    { name: "Vision Patch", price: 60, img: productImg },
-  ];
 
   useEffect(() => {
     document.body.classList.add("shop-no-bg");
@@ -40,32 +24,17 @@ const ShopWidget = () => {
   // Filter products when search query changes
   useEffect(() => {
     if (!searchQuery) {
-      setFilteredProducts(products);
+      setFilteredProducts(itemList);
     } else {
-      const filtered = products.filter((product) =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      const filtered = itemList.filter((product) =>
+        product.itemName.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredProducts(filtered);
     }
-  }, [searchQuery]);
-
-  const handleAddToCart = (product) => {
-    setCart([...cart, { ...product, img: productImg }]);
-    setShowAlert(true);
-
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 1500);
-  };
+  }, [searchQuery, itemList]);
 
   return (
     <div className="shop-bg">
-      {showAlert && (
-        <div className="shop-alert">
-          <span className="material-symbols-rounded">check_circle</span>
-          Added to cart
-        </div>
-      )}
       <h1 className="shop-title">
         {searchQuery ? `Search Results for "${searchQuery}"` : "All Products"}
       </h1>

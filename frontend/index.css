@@ -1,0 +1,146 @@
+/* Better welcome section styling */
+.welcome-section {
+  background: rgba(13, 27, 77, 0.65) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(100, 108, 255, 0.3) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 24px !important;
+  padding: 40px !important;
+}
+
+.welcome-title {
+  color: #ffffff !important;
+  font-size: 2.6rem !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+  letter-spacing: -0.5px !important;
+  margin-bottom: 0.8rem !important;
+  background: linear-gradient(90deg, #fff, #a5b4fc) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.welcome-subtitle {
+  color: #a5b4fc !important;
+  font-size: 1.5rem !important;
+  font-weight: 500 !important;
+  margin-bottom: 1.2rem !important;
+}
+
+.welcome-desc {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 1.1rem !important;
+  line-height: 1.7 !important;
+  margin-bottom: 2rem !important;
+}
+
+.welcome-buttons {
+  margin-top: 1rem !important;
+}
+
+.welcome-btn {
+  padding: 1rem 2.2rem !important;
+  border-radius: 50px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  transition: all 0.3s !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.all-products-btn {
+  background: linear-gradient(90deg, #646cff, #8a91ff) !important;
+  border: none !important;
+}
+
+.all-products-btn:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(100, 108, 255, 0.4) !important;
+}
+
+.cart-btn {
+  border: 2px solid rgba(165, 180, 252, 0.6) !important;
+}
+
+.cart-btn:hover {
+  background: rgba(100, 108, 255, 0.9) !important;
+  border-color: transparent !important;
+  transform: translateY(-3px) !important;
+}
+
+/* Enhanced contact section */
+.contact-section {
+  background: rgba(13, 27, 77, 0.65) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(100, 108, 255, 0.3) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 24px !important;
+  padding: 40px !important;
+  max-width: 650px !important;
+  margin: 80px auto !important;
+}
+
+.contact-title {
+  color: #ffffff !important;
+  font-size: 2.4rem !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+  margin-bottom: 2rem !important;
+  background: linear-gradient(90deg, #fff, #a5b4fc) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-align: center !important;
+}
+
+.contact-input {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(165, 180, 252, 0.3) !important;
+  color: white !important;
+  border-radius: 12px !important;
+  padding: 14px 18px !important;
+  font-size: 1rem !important;
+  transition: all 0.3s !important;
+}
+
+.contact-input:focus {
+  border-color: rgba(165, 180, 252, 0.8) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.15) !important;
+}
+
+.contact-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.contact-submit {
+  background: linear-gradient(90deg, #646cff, #8a91ff) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s !important;
+}
+
+.contact-submit:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(100, 108, 255, 0.4) !important;
+}
+
+.contact-textarea {
+  min-height: 150px !important;
+}
+
+/* Make the blurred sections more transparent on mobile */
+@media (max-width: 768px) {
+  .welcome-section,
+  .contact-section {
+    padding: 30px 24px !important;
+  }
+  
+  .welcome-title {
+    font-size: 2.2rem !important;
+  }
+  
+  .contact-title {
+    font-size: 2rem !important;
+  }
+}

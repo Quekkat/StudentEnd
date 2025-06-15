@@ -3,7 +3,7 @@ import { useForm, ValidationError } from "@formspree/react";
 import { useNavigate } from "react-router-dom";
 import "./DashboardTab.css";
 import logo from "../assets/logo.png";
-import hitleer from "../assets/hitleer.jpg";
+import welcomeImage from "../assets/logo.png"; // Use existing logo or add a new image
 import { useStore } from "../GlobalVariables";
 
 const DashboardTab = () => {
@@ -71,7 +71,7 @@ const DashboardTab = () => {
           <button className="nav-link" onClick={() => handleNavClick("shop")}>
             All Products
           </button>
-          <button className="nav-link" onClick={() => handleNavClick("cart")}>
+          <button className="nav-link" onClick={() => handleNavClick("ordering")}>
             <span className="material-symbols-rounded">shopping_cart</span>
           </button>
           <button className="nav-link logout-btn" onClick={handleLogout}>
@@ -117,7 +117,7 @@ const DashboardTab = () => {
         <button className="nav-link" onClick={() => handleNavClick("shop")}>
           All Products
         </button>
-        <button className="nav-link" onClick={() => handleNavClick("cart")}>
+        <button className="nav-link" onClick={() => handleNavClick("ordering")}>
           <span className="material-symbols-rounded">shopping_cart</span>
           Cart
         </button>
@@ -155,7 +155,7 @@ const DashboardTab = () => {
             </section>
             <div className="welcome-image-container">
               <img
-                src={hitleer}
+                src={welcomeImage} // Changed from hitleer
                 alt="Vision Academy"
                 className="welcome-image"
               />
