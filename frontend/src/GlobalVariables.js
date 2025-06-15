@@ -2,10 +2,11 @@ import { create } from "zustand";
 import { axiosInstance } from "./axios";
 
 export const useStore = create((set, get) => ({
-  authUser: true, // change to null if you want to cum later
+  authUser: null, // change to null if you want to cum later
   widgetTab: "home", // default tab is fucking home
   cart: [], // Add this nigga line
   searchQuery: "", // Add this line to properly store search query
+  itemList:[],
 
   // Add proper setSearchQuery function
   setSearchQuery: (query) => set({ searchQuery: query }),
@@ -17,6 +18,7 @@ export const useStore = create((set, get) => ({
       set({ authUser: res.data });
     } catch (error) {
       console.log(error.response.data.message);
+      console.log(data);
     }
   },
   
@@ -24,6 +26,7 @@ export const useStore = create((set, get) => ({
     try {
       const res = await axiosInstance.post("/auth/signup", data);
       set({ authUser: res.data });
+      console.log(res.data);
     } catch (error) {
       console.log(error.response.data.message);
     }
@@ -66,9 +69,10 @@ export const useStore = create((set, get) => ({
       console.log(error.response.data.message);
     }
   },
-  cancelOrderItem: async()=>{
+  cancelOrderItem: async(data)=>{
     try{
-
+      const res = await axiosInstance.post("auth/removeOrder",data );
+      console.log(res.data);
     }catch(error){
       console.log(error.response.data.message);
     }

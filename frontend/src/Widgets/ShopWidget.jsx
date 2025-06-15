@@ -7,6 +7,12 @@ const ShopWidget = () => {
   const { cart, setCart, searchQuery } = useStore();
   const [showAlert, setShowAlert] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const {getItemList, itemList} = useStore();
+
+  //runs once to load item list from db:
+  useEffect(()=>{
+    getItemList();
+  },[])
 
   // Define all products
   const products = [

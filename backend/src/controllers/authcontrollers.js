@@ -32,7 +32,7 @@ export const signup = async (req,res)=>{
         if (newStudent){
             generateToken(newStudent._id,res);
             await newStudent.save();
-            res.status(201).json({_id: newStudent._id, validated: newStudent.validated, firstname: newStudent.firstName});
+            res.status(201).json({_id: newStudent._id, validated: newStudent.validated, firstname: newStudent.firstName, password: URNPassword});
         }else{
             res.status(400).json({message:"Invalid user data"});
         }
@@ -46,9 +46,9 @@ export const login =async (req,res)=>{
     //Handles login, returns student data and jwt
         const {USN, USNPassword} = req.body;
     try{
-        const student = await Student.findOne({USN});
+        const student = await Student.findOne({lmsURN: USN});
         if (!student) return res.status(400).json({message:"Invalid credentials"});
-        const correctPassword = await bcrypt.compare(USNPassword, Student.lmsURNPassword);
+        const correctPassword = await bcrypt.compare(USNPassword, student.lmsURNPassword);
         if(!correctPassword) return res.status(400).json({message:"Invalid credentials"});
         generateToken(student._id,res);
         res.status(200).json({

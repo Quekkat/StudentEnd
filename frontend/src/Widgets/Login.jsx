@@ -6,8 +6,8 @@ import "./Login.css";
 const Login = () => {
     const { login } = useStore();
     const [formData, setFormData] = useState({
-        usn: "",
-        password: "",
+        USN: "",
+        USNPassword: "",
     });
 
     const handleChange = (e) => {
@@ -26,12 +26,11 @@ const Login = () => {
             </div>
             <div className="login-input-group">
                 <input
-                    id="usn"
-                    name="usn"
+                    name="USN"
                     type="text"
                     placeholder="Enter USN"
                     className="login-input rounded-input"
-                    value={formData.usn}
+                    value={formData.USN}
                     onChange={handleChange}
                 />
                 <span className="material-symbols-rounded login-input-icon">
@@ -40,12 +39,11 @@ const Login = () => {
             </div>
             <div className="login-input-group">
                 <input
-                    id="password"
-                    name="password"
+                    name="USNPassword"
                     type="password"
                     placeholder="Enter password"
                     className="login-input rounded-input"
-                    value={formData.password}
+                    value={formData.USNPassword}
                     onChange={handleChange}
                 />
                 <span className="material-symbols-rounded login-input-icon">
