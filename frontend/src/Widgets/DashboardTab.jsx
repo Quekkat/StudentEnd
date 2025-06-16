@@ -68,6 +68,9 @@ const DashboardTab = () => {
 
         {/* Right section with All Products, cart and logout buttons */}
         <div className="navbar-section navbar-right desktop-only">
+          <button className="nav-link" onClick={() => handleNavClick("cart")}>
+            Ordered Items
+          </button>
           <button className="nav-link" onClick={() => handleNavClick("shop")}>
             All Products
           </button>
@@ -114,6 +117,9 @@ const DashboardTab = () => {
             }
           }}
         />
+        <button className="nav-link" onClick={() => handleNavClick("cart")}>
+          Ordered Items
+        </button>
         <button className="nav-link" onClick={() => handleNavClick("shop")}>
           All Products
         </button>
