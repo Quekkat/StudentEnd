@@ -1,12 +1,12 @@
 import { useStore } from "../GlobalVariables";
 
 const ShopWidgetCard = ({ item }) => {
-  const { cart, setCart, setWidgetTab } = useStore();
+  const { cart, setCart, setWidgetTab,setItemToOrderID } = useStore();
   
   // Add to cart and go directly to cart page
   const handleAddToCart = () => {
     // Add item to cart
-    setCart([...cart, item]);
+    setCart(item);
     
     // Navigate to cart page
     setWidgetTab("ordering");

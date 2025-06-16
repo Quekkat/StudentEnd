@@ -87,23 +87,26 @@ export const orderProduct = async (req,res) =>{
         const {ORDERID, GCASHPROOF} = req.body;
         const student = req.student;
         if(!ORDERID || ! GCASHPROOF) return res.status(400).json({message: "Incomplete request"});
+        console.log("complete request");
         const targetProduct = await Inventory.findById(ORDERID);
+        if(targetProduct) console.log("product found");
         if(!targetProduct) return res.status(404).json({message:"product doesnt exist"});
 
 
         //cloudinary
         const proofOfPayment = await cloudinary.uploader.upload(GCASHPROOF);
-
+        console.log("cloudinary passed");
         const studentFullname = student.firstName + " " + student.lastName;
+        console.log("student name created");
         //creates new product
-        const newOrder = await new OrderList({
+        const newOrder = new OrderList({
             itemName: targetProduct.itemName,
             itemID: targetProduct._id,
             proofOfPaymentImage: proofOfPayment.secure_url,
             studentName: studentFullname,
+            studentUID: student._id,
             studentLMSID: student.lmsURN,
         })
-
         if(newOrder){
             await newOrder.save();
             res.status(200).json(newOrder);

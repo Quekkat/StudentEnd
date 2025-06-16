@@ -22,3 +22,10 @@ const items = [
     paymentVerified: false
   }
 ];
+const ItemsBoughtListWidget=()=>{
+
+    return(
+        <p>bruh</p>
+    )
+}
+export default ItemsBoughtListWidget;

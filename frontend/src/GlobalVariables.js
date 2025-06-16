@@ -4,11 +4,13 @@ import { axiosInstance } from "./axios";
 export const useStore = create((set, get) => ({
   authUser: null, // change to null if you want to cum later
   widgetTab: "home", // default tab is fucking home
-  cart: [], // Add this nigga line
+  cart: null, //
   searchQuery: "", // Add this line to properly store search query
   itemList:[],
   itemsBoughtList:[],// list of item bought
   orderingItem:null,
+  itemToOrder:null,
+
 
   // Add proper setSearchQuery function
   setSearchQuery: (query) => set({ searchQuery: query }),
@@ -58,6 +60,7 @@ export const useStore = create((set, get) => ({
       const res =await axiosInstance.post("/auth/addNewOrder", data);
       console.log(res.data);
       get().getItemList();
+      set({widgetTab:"shop"});
     }catch(error){
       console.log(error.response.data.message);
     }
@@ -91,5 +94,7 @@ export const useStore = create((set, get) => ({
     set({orderingItem: item});
     set({widgetTab:"ordering"});
   },
-  
+  setItemToOrder:(item)=>{
+    set({itemToOrder: item});
+  },
 }));
